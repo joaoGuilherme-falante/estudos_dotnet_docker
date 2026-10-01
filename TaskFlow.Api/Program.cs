@@ -1,8 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using TaskFlow.Api.Data;
 using TaskFlow.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<IPingService, PingService>();
+builder.Services.AddDbContext<TaskFlowDbContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("TaskFlowDb")
+        ?? throw new InvalidOperationException(
+            "Connection string 'TaskFlowDb' was not configured. Set ConnectionStrings__TaskFlowDb.");
+
+    options.UseNpgsql(connectionString);
+});
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
