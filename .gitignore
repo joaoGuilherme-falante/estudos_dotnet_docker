@@ -1,0 +1,38 @@
+# Build outputs
+**/bin/
+**/obj/
+**/out/
+**/publish/
+artifacts/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Test and coverage results
+**/TestResults/
+coverage/
+coverage.*
+
+# NuGet
+*.nupkg
+*.snupkg
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+secrets.json
+appsettings.*.local.json
+
+# IDE and OS files
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local copy of Git metadata
+.git copy/
