@@ -1,6 +1,60 @@
-@TaskFlow.Api_HostAddress = http://localhost:5121
+@baseUrl = http://localhost:8080
+@token = paste-login-token-here
 
-GET {{TaskFlow.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+### Health
+GET {{baseUrl}}/health
 
-###
+### Login with the bootstrap administrator
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.local",
+  "password": "replace-with-a-strong-admin-password"
+}
+
+### Create a project (Admin or Manager)
+POST {{baseUrl}}/api/projects
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Website refresh",
+  "description": "TaskFlow example project"
+}
+
+### List projects
+GET {{baseUrl}}/api/projects
+Authorization: Bearer {{token}}
+
+### Create a task
+POST {{baseUrl}}/api/tasks
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Create the landing page",
+  "description": "Implement the first responsive page",
+  "priority": "High",
+  "projectId": 1,
+  "assignedUserId": null,
+  "dueDate": null
+}
+
+### Advance a task by one workflow step
+PATCH {{baseUrl}}/api/tasks/1/status
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "status": "Todo"
+}
+
+### Add a comment
+POST {{baseUrl}}/api/tasks/1/comments
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "content": "I started working on this."
+}

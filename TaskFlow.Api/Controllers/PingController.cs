@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskFlow.Api.Services;
 
-namespace TaskFlow.Api.Controller;
+namespace TaskFlow.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
